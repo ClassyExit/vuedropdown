@@ -1,19 +1,7 @@
-# vuedropdown
+# Vue 3 Dropdown (Single + Multiselect)
 
-## Project setup
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
+Single and Multiselect components with capabilities of clearing, deleting, and passing in a set of options to present for the dropdowns
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+![Example](https://prnt.sc/sJzGfeGzbRNN)

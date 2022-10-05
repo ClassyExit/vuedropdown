@@ -26,6 +26,9 @@
 <script setup>
 import { ref } from "vue";
 
+// Pass data from component -> parent
+const emit = defineEmits(["data"]);
+
 const props = defineProps({
   options: {
     type: Array,
@@ -36,14 +39,20 @@ const props = defineProps({
 const isOpen = ref(false);
 let isSelected = ref({ label: "Click to select an option", value: false });
 
+const sendSelectedOption = () => {
+  emit("data", isSelected.value);
+};
+
 // Selected option
 const selectOption = (option) => {
   isSelected.value = option;
+  sendSelectedOption();
 };
 
 // Clear Selected Option
 const clearSelected = () => {
   isSelected.value = {};
+  sendSelectedOption();
 };
 
 // Highlight the current selected option

@@ -1,9 +1,18 @@
 <template>
   <h3>Single drop down</h3>
-  <singleDropDown :options="options"></singleDropDown>
+  <singleDropDown
+    @data="(data) => (singleDropdownData = data)"
+    :options="options"
+  ></singleDropDown>
 
   <h3>Multi drop down</h3>
-  <multiDropDown v-bind:value="test" :options="options"></multiDropDown>
+  <multiDropDown
+    @data="(data) => (multiDropdownData = data)"
+    :options="options"
+  ></multiDropDown>
+
+  <h5>{{ singleDropdownData }}</h5>
+  <h5>{{ multiDropdownData }}</h5>
 </template>
 
 <script lang="ts">
@@ -24,9 +33,10 @@ export default defineComponent({
       { label: "Fifth Option", value: 5 },
     ];
 
-    let test: any = [];
+    let singleDropdownData: any = ref({});
+    let multiDropdownData: any = ref([]);
 
-    return { options, test };
+    return { options, singleDropdownData, multiDropdownData };
   },
 });
 </script>

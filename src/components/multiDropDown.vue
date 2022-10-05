@@ -1,6 +1,5 @@
 <template>
   <div
-    :data="selectedOptions"
     class="container"
     tabindex="0"
     @click="isOpen = !isOpen"
@@ -38,6 +37,8 @@
 <script setup>
 import { ref } from "vue";
 
+const emit = defineEmits(["data"]);
+
 const props = defineProps({
   options: {
     type: Array,
@@ -48,22 +49,29 @@ const props = defineProps({
 const isOpen = ref(false);
 let selectedOptions = ref([]);
 
+// Send data from component -> parent
+const sendSelectedOptions = () => {
+  emit("data", selectedOptions.value);
+};
 
 // Add options
 const addOption = (option) => {
   if (selectedOptions.value.includes(option)) {
     //If option is already selected, unselect it
-
     removeOption(option.value);
   } else {
-    // add option
+    // add the option
     selectedOptions.value.push(option);
   }
+
+  sendSelectedOptions();
 };
 
-// Clear all selected options
 const clearAllOptions = () => {
+  // Clear all selected optionss
   selectedOptions.value = [];
+
+  sendSelectedOptions();
 };
 
 const removeOption = (optionValue) => {
@@ -74,10 +82,12 @@ const removeOption = (optionValue) => {
 
   // Remove from array
   selectedOptions.value.splice(index, 1);
+
+  sendSelectedOptions();
 };
 
-// Highlight the current selected option
 const isOptionSelected = (option) => {
+  // Highlight the current selected option
   return selectedOptions.value.includes(option);
 };
 </script>
